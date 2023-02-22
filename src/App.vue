@@ -1,28 +1,39 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
+  <section class="catalog">
+    <ProductList :products="products"></ProductList>
+
+    <BasePagination
+      v-model="page"
+      :count="countProducts"
+      :per-page="productsPerPage"
+    ></BasePagination>
+  </section>
 </template>
 
 <script>
-import HelloWorld from "./components/HelloWorld.vue";
+import { products } from "./data/products";
+import ProductList from "./components/ProductList.vue";
+import BasePagination from "./components/BasePagination.vue";
 
 export default {
   name: "App",
-  components: {
-    HelloWorld,
+  components: { ProductList, BasePagination },
+  data: function () {
+    return {
+      page: 1,
+      productsPerPage: 3,
+    };
+  },
+  computed: {
+    products() {
+      const offset = (this.page - 1) * this.productsPerPage;
+      return products.slice(offset, offset + this.productsPerPage);
+    },
+    countProducts() {
+      return products.length;
+    },
   },
 };
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>

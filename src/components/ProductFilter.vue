@@ -14,7 +14,6 @@
             class="form__input"
             type="text"
             name="max-price"
-            value="12345"
             v-model.number="currentPriceTo"
           />
           <span class="form__value">До</span>

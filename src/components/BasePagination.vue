@@ -60,12 +60,12 @@ export default {
     },
     paginateNext() {
       this.$emit(
-        "update:page",
+        "paginate",
         this.page !== this.pages ? this.page + 1 : this.page
       );
     },
     paginatePrev() {
-      this.$emit("update:page", this.page !== 1 ? this.page - 1 : this.page);
+      this.$emit("paginate", this.page !== 1 ? this.page - 1 : this.page);
     },
   },
 };

@@ -6,15 +6,10 @@
     </div>
 
     <div class="content__catalog">
-      <!-- <ExampleForm
-        :age="exampleAge"
-        :name="exampleName"
-        :married="exampleMarried"
-      ></ExampleForm> -->
       <ProductFilter
-        :price-from="filterPriceFrom"
-        :price-to="filterPriceTo"
-        :category-id="filterCategoryId"
+        :price-from.sync="filterPriceFrom"
+        :price-to.sync="filterPriceTo"
+        :category-id.sync="filterCategoryId"
       ></ProductFilter>
       <section class="catalog">
         <ProductList :products="products"></ProductList>
@@ -34,7 +29,6 @@ import { products } from "./data/products";
 import ProductList from "./components/ProductList.vue";
 import BasePagination from "./components/BasePagination.vue";
 import ProductFilter from "./components/ProductFilter.vue";
-// import ExampleForm from "./components/ExampleForm.vue";
 export default {
   name: "App",
   components: { ProductList, BasePagination, ProductFilter },

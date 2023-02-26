@@ -13,7 +13,7 @@ export const products = [
     title: "Ультразвуковая зубная щётка Playbrush Smart Sonic",
     price: 5660,
     img: "img/toothbrush.jpg",
-    colors: ["#FFF", '#73B6EA', '#FFBE15'],
+    colors: ["#F0F0F0", '#73B6EA', '#FFBE15'],
   },
   {
     id: 3,
@@ -62,7 +62,7 @@ export const products = [
     title: "Гироскутер Razor Hovertrax 2.0",
     price: 34900,
     img: "img/wheels.jpg",
-    colors: ["#939393", "#FFF"],
+    colors: ["#939393", "#F0F0F0"],
 
   },
   {

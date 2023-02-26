@@ -3,7 +3,6 @@
     <a class="catalog__pic" href="#">
       <img
         v-bind:src="product.img"
-        srcset="img/radio@2x.jpg 2x"
         alt="Название товара"
       />
     </a>

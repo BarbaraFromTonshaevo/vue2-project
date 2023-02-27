@@ -5,7 +5,7 @@ export const products = [
     title: "Радионяня Motorola MBP16",
     price: 3690,
     img: "img/radio.jpg",
-    colors: ['#73B6EA', '#FFBE15', '#939393'],
+    colors: ["#73B6EA", "#FFBE15", "#939393"],
   },
   {
     id: 2,
@@ -13,7 +13,7 @@ export const products = [
     title: "Ультразвуковая зубная щётка Playbrush Smart Sonic",
     price: 5660,
     img: "img/toothbrush.jpg",
-    colors: ["#F0F0F0", '#73B6EA', '#FFBE15'],
+    colors: ["#F0F0F0", "#73B6EA", "#FFBE15"],
   },
   {
     id: 3,
@@ -46,7 +46,6 @@ export const products = [
     price: 8960,
     img: "img/phone-3.jpg",
     colors: [],
-
   },
   {
     id: 7,
@@ -63,7 +62,6 @@ export const products = [
     price: 34900,
     img: "img/wheels.jpg",
     colors: ["#939393", "#F0F0F0"],
-
   },
   {
     id: 9,

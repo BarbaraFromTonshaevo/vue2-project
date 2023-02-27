@@ -2,11 +2,21 @@
   <aside class="filter">
     <h2 class="filter__title">Фильтры</h2>
 
-    <form class="filter__form form" action="#" method="get" @submit.prevent="submit">
+    <form
+      class="filter__form form"
+      action="#"
+      method="get"
+      @submit.prevent="submit"
+    >
       <fieldset class="form__block">
         <legend class="form__legend">Цена</legend>
         <label class="form__label form__label--price">
-          <input class="form__input" type="text" name="min-price" v-model.number="currentPriceFrom"/>
+          <input
+            class="form__input"
+            type="text"
+            name="min-price"
+            v-model.number="currentPriceFrom"
+          />
           <span class="form__value">От</span>
         </label>
         <label class="form__label form__label--price">
@@ -23,7 +33,12 @@
       <fieldset class="form__block">
         <legend class="form__legend">Категория</legend>
         <label class="form__label form__label--select">
-          <select class="form__select" type="text" name="category" v-model.number="currentCategoryId">
+          <select
+            class="form__select"
+            type="text"
+            name="category"
+            v-model.number="currentCategoryId"
+          >
             <option value="0">Все категории</option>
             <option
               :value="category.id"
@@ -45,12 +60,30 @@
                 class="colors__radio sr-only"
                 type="radio"
                 name="color"
-                :value=0
+                :value="0"
                 checked=""
                 v-model="currentColor"
               />
-              <span class="colors__value" 
-                style="background: linear-gradient(217deg, rgba(115, 182, 234,1), rgba(115, 182, 234,0) 60%), linear-gradient(127deg, rgba(255, 190, 21,1), rgba(255, 190, 21,0) 60%), linear-gradient(336deg, rgba(139, 224, 0,1), rgba(139, 224, 0,0) 60%) white;"
+              <span
+                class="colors__value"
+                style="
+                  background: linear-gradient(
+                      217deg,
+                      rgba(115, 182, 234, 1),
+                      rgba(115, 182, 234, 0) 60%
+                    ),
+                    linear-gradient(
+                      127deg,
+                      rgba(255, 190, 21, 1),
+                      rgba(255, 190, 21, 0) 60%
+                    ),
+                    linear-gradient(
+                        336deg,
+                        rgba(139, 224, 0, 1),
+                        rgba(139, 224, 0, 0) 60%
+                      )
+                      white;
+                "
               >
               </span>
             </label>
@@ -61,11 +94,14 @@
                 class="colors__radio sr-only"
                 type="radio"
                 name="color"
-                :value=color
+                :value="color"
                 checked=""
                 v-model="currentColor"
               />
-              <span class="colors__value" v-bind:style="{ backgroundColor: color }">
+              <span
+                class="colors__value"
+                v-bind:style="{ backgroundColor: color }"
+              >
               </span>
             </label>
           </li>
@@ -166,7 +202,11 @@
       <button class="filter__submit button button--primery" type="submit">
         Применить
       </button>
-      <button class="filter__reset button button--second" type="button" @click.prevent="reset">
+      <button
+        class="filter__reset button button--second"
+        type="button"
+        @click.prevent="reset"
+      >
         Сбросить
       </button>
     </form>
@@ -178,13 +218,13 @@ import colors from "../data/colors";
 
 export default {
   props: ["priceFrom", "priceTo", "categoryId", "color"],
-  data(){
+  data() {
     return {
       currentPriceFrom: 0,
       currentPriceTo: 0,
       currentCategoryId: 0,
       currentColor: 0,
-    }
+    };
   },
   computed: {
     categories() {
@@ -195,31 +235,31 @@ export default {
     },
   },
   watch: {
-    priceFrom(value){
+    priceFrom(value) {
       this.currentPriceFrom = value;
     },
-    priceTo(value){
+    priceTo(value) {
       this.currentPriceTo = value;
     },
-    categoryId(value){
+    categoryId(value) {
       this.currentCategoryId = value;
     },
-    color(value){
+    color(value) {
       this.currentColor = value;
     },
   },
   methods: {
-    submit(){
-      this.$emit('update:priceFrom', this.currentPriceFrom);
-      this.$emit('update:priceTo', this.currentPriceTo);
-      this.$emit('update:categoryId', this.currentCategoryId);
-      this.$emit('update:color', this.currentColor);
+    submit() {
+      this.$emit("update:priceFrom", this.currentPriceFrom);
+      this.$emit("update:priceTo", this.currentPriceTo);
+      this.$emit("update:categoryId", this.currentCategoryId);
+      this.$emit("update:color", this.currentColor);
     },
-    reset(){
-      this.$emit('update:priceFrom', 0);
-      this.$emit('update:priceTo', 0);
-      this.$emit('update:categoryId', 0);
-      this.$emit('update:color', 0);
+    reset() {
+      this.$emit("update:priceFrom", 0);
+      this.$emit("update:priceTo", 0);
+      this.$emit("update:categoryId", 0);
+      this.$emit("update:color", 0);
     },
   },
 };

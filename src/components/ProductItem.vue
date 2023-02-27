@@ -8,7 +8,7 @@
       <a href="#"> {{ product.title }} </a>
     </h3>
 
-    <span class="catalog__price"> {{ product.price }} </span>
+    <span class="catalog__price"> {{ product.price | numberFormat }} </span>
 
     <ul class="colors colors--black">
       <li
@@ -26,7 +26,8 @@
   </li>
 </template>
 <script>
-import eventBus from '@/eventBus';
+import goToPage from '@/helpers/goToPage';
+import numberFormat from '@/helpers/numberFormat';
 export default {
   data() {
     return {
@@ -35,9 +36,10 @@ export default {
   },
   props: ["product"],
   methods: {
-    goToPage(pageName, pageParams){
-      eventBus.$emit('goToPage', pageName, pageParams);
-    }
+    goToPage
+  },
+  filters: {
+    numberFormat
   },
 };
 </script>

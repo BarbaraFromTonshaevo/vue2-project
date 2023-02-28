@@ -1,5 +1,5 @@
 <template>
-  <component :is="currentPageComponent" :page-params="currentPageParams"/>
+  <component :is="currentPageComponent" :page-params="currentPageParams" />
 </template>
 
 <script>
@@ -8,9 +8,9 @@ import ProductPage from "./pages/ProductPage.vue";
 import NotFoundPage from "./pages/NotFoundPage.vue";
 import eventBus from "./eventBus";
 const routes = {
-  main: 'MainPage',
-  product: 'ProductPage',
-}
+  main: "MainPage",
+  product: "ProductPage",
+};
 export default {
   name: "App",
   components: { MainPage, ProductPage, NotFoundPage },
@@ -21,20 +21,22 @@ export default {
     };
   },
   computed: {
-    currentPageComponent(){
-      return routes[this.currentPage] || 'NotFoundPage';
-    }
+    currentPageComponent() {
+      return routes[this.currentPage] || "NotFoundPage";
+    },
   },
   methods: {
-    goToPage(pageName, pageParams){
+    goToPage(pageName, pageParams) {
       this.currentPage = pageName;
       this.currentPageParams = pageParams || {};
-    }
+    },
   },
-  created(){
+  created() {
     // console.log('created');
-    eventBus.$on('goToPage', (pageName, pageParams) => this.goToPage(pageName, pageParams));
-  }
+    eventBus.$on("goToPage", (pageName, pageParams) =>
+      this.goToPage(pageName, pageParams)
+    );
+  },
 };
 </script>
 

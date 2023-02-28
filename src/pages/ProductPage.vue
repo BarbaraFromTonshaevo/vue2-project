@@ -3,10 +3,22 @@
     <div class="content__top">
       <ul class="breadcrumbs">
         <li class="breadcrumbs__item">
-          <a class="breadcrumbs__link" href="#" @click.prevent="goToPage('main')"> Каталог </a>
+          <a
+            class="breadcrumbs__link"
+            href="#"
+            @click.prevent="goToPage('main')"
+          >
+            Каталог
+          </a>
         </li>
         <li class="breadcrumbs__item">
-          <a class="breadcrumbs__link" href="#" @click.prevent="goToPage('main')"> {{ category.title }} </a>
+          <a
+            class="breadcrumbs__link"
+            href="#"
+            @click.prevent="goToPage('main')"
+          >
+            {{ category.title }}
+          </a>
         </li>
         <li class="breadcrumbs__item">
           <a class="breadcrumbs__link"> {{ product.title }} </a>
@@ -31,55 +43,30 @@
         <h2 class="item__title">{{ product.title }}</h2>
         <div class="item__form">
           <form class="form" action="#" method="POST">
-            <b class="item__price"> {{ product.price |  numberFormat }} ₽ </b>
+            <b class="item__price"> {{ product.price | numberFormat }} ₽ </b>
 
-            <fieldset class="form__block">
+            <fieldset class="form__block" v-if="product.colors.length">
               <legend class="form__legend">Цвет:</legend>
               <ul class="colors">
-                <li class="colors__item">
+                <li
+                  class="colors__item"
+                  v-for="color in product.colors"
+                  :key="color"
+                >
                   <label class="colors__label">
                     <input
                       class="colors__radio sr-only"
                       type="radio"
                       name="color-item"
-                      value="blue"
+                      :value="color"
                       checked=""
                     />
                     <span
                       class="colors__value"
-                      style="background-color: #73b6ea"
+                      :style="{ backgroundColor: color }"
                     >
                     </span>
                   </label>
-                </li>
-                <li class="colors__item">
-                  <label class="colors__label">
-                    <input
-                      class="colors__radio sr-only"
-                      type="radio"
-                      name="color-item"
-                      value="yellow"
-                    />
-                    <span
-                      class="colors__value"
-                      style="background-color: #ffbe15"
-                    >
-                    </span>
-                  </label>
-                </li>
-                <li class="colors__item">
-                  <label class="colors__label">
-                    <input
-                      class="colors__radio sr-only"
-                      type="radio"
-                      name="color-item"
-                      value="gray" />
-                    <span
-                      class="colors__value"
-                      style="background-color: #939393"
-                    >
-                    </span
-                  ></label>
                 </li>
               </ul>
             </fieldset>
@@ -212,25 +199,27 @@
   </main>
 </template>
 <script>
-import { products } from '@/data/products';
-import categories from '@/data/categories';
-import goToPage from '@/helpers/goToPage';
-import numberFormat from '@/helpers/numberFormat'
+import { products } from "@/data/products";
+import categories from "@/data/categories";
+import goToPage from "@/helpers/goToPage";
+import numberFormat from "@/helpers/numberFormat";
 export default {
-    props: ['pageParams'],
-    computed: {
-        product(){
-            return products.find(product => product.id === this.pageParams.id);
-        },
-        category(){
-            return categories.find(category => category.id === this.product.categoryId);
-        },
+  props: ["pageParams"],
+  computed: {
+    product() {
+      return products.find((product) => product.id === this.pageParams.id);
     },
-    filters: {
-        numberFormat
+    category() {
+      return categories.find(
+        (category) => category.id === this.product.categoryId
+      );
     },
-    methods: {
-        goToPage
-    },
+  },
+  filters: {
+    numberFormat,
+  },
+  methods: {
+    goToPage,
+  },
 };
 </script>

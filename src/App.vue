@@ -14,17 +14,7 @@
         </a>
 
         <a class="header__tel" href="tel:8 800 600 90 09"> 8 800 600 90 09 </a>
-
-        <router-link
-          class="header__cart"
-          :to="{ name: 'cart' }"
-          aria-label="Корзина с товарами"
-        >
-          <svg width="30" height="21" fill="currentColor">
-            <use xlink:href="#icon-cart"></use>
-          </svg>
-          <span class="header__count" aria-label="Количество товаров">3</span>
-        </router-link>
+        <CartIndicator></CartIndicator>
       </div>
     </header>
     <router-view />
@@ -128,8 +118,10 @@
 </template>
 
 <script>
+import CartIndicator from "./components/CartIndicator.vue";
 export default {
   // name: "App",
+  components: { CartIndicator },
 };
 </script>
 

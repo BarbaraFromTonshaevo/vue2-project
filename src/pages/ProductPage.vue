@@ -121,7 +121,7 @@
                   </svg>
                 </button>
 
-                <input type="text" v-model="productAmount" />
+                <input type="text" v-model.number="productAmount" />
 
                 <button type="button" aria-label="Добавить один товар">
                   <svg width="12" height="12" fill="currentColor">
@@ -205,12 +205,12 @@ import categories from "@/data/categories";
 import goToPage from "@/helpers/goToPage";
 import numberFormat from "@/helpers/numberFormat";
 export default {
+  data() {
+    return {
+      productAmount: 1,
+    };
+  },
   computed: {
-    data() {
-      return {
-        productAmount: 1,
-      };
-    },
     product() {
       return products.find((product) => product.id === +this.$route.params.id);
     },
@@ -225,7 +225,12 @@ export default {
   },
   methods: {
     goToPage,
-    addToCart() {},
+    addToCart() {
+      this.$store.commit("addProductToCart", {
+        productId: this.product.id,
+        amount: this.productAmount,
+      });
+    },
   },
 };
 </script>

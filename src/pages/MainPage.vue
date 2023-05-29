@@ -30,6 +30,7 @@ import { products } from "@/data/products";
 import ProductList from "@/components/ProductList.vue";
 import BasePagination from "@/components/BasePagination.vue";
 import ProductFilter from "@/components/ProductFilter.vue";
+import axios from 'axios';
 export default {
   components: { ProductList, BasePagination, ProductFilter },
   data: function () {
@@ -45,6 +46,7 @@ export default {
 
       page: 1,
       productsPerPage: 3,
+      productsData: null,
     };
   },
   computed: {
@@ -81,6 +83,14 @@ export default {
       return this.filteredProducts.length;
     },
   },
+  methods: {
+    loadProducts(){
+      axios.get();
+    },
+  },
+  created(){
+    this.loadProducts();
+  }
 };
 </script>
 

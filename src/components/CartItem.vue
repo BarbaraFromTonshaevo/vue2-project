@@ -14,7 +14,7 @@
     </h3>
     <span class="product__code"> Артикул: {{ item.product.id }} </span>
 
-    <div class="product__counter form__counter">
+    <!-- <div class="product__counter form__counter">
       <button type="button" aria-label="Убрать один товар">
         <svg width="10" height="10" fill="currentColor">
           <use xlink:href="#icon-minus"></use>
@@ -28,7 +28,8 @@
           <use xlink:href="#icon-plus"></use>
         </svg>
       </button>
-    </div>
+    </div> -->
+    <CounterForm :counter.sync="amount"></CounterForm>
 
     <b class="product__price">
       {{ (item.amount * item.product.price) | numberFormat }} ₽
@@ -48,6 +49,7 @@
 </template>
 
 <script>
+import CounterForm from "@/components/CounterForm.vue";
 import numberFormat from "@/helpers/numberFormat";
 import { mapMutations } from "vuex";
 export default {
@@ -69,5 +71,6 @@ export default {
   methods: {
     ...mapMutations({ deleteProduct: "deleteCartProduct" }),
   },
+  components: { CounterForm },
 };
 </script>

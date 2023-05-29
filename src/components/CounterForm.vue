@@ -1,6 +1,6 @@
 <template>
   <div class="form__counter">
-    <button type="button" aria-label="Убрать один товар">
+    <button type="button" aria-label="Убрать один товар" @click="decrement">
       <svg width="12" height="12" fill="currentColor">
         <use xlink:href="#icon-minus"></use>
       </svg>
@@ -8,11 +8,11 @@
 
     <input
       type="text"
-      :value="value"
+      :value="counter"
       @input="$emit('input', +$event.target.value)"
     />
 
-    <button type="button" aria-label="Добавить один товар">
+    <button type="button" aria-label="Добавить один товар" @click="increment">
       <svg width="12" height="12" fill="currentColor">
         <use xlink:href="#icon-plus"></use>
       </svg>
@@ -21,9 +21,15 @@
 </template>
 <script>
 export default {
-  props: {
-    value: {
-      type: Number,
+  props: ["counter"],
+  methods: {
+    increment() {
+      this.$emit("update:counter", this.counter + 1);
+    },
+    decrement() {
+      if (this.counter > 1) {
+        this.$emit("update:counter", this.counter - 1);
+      }
     },
   },
 };

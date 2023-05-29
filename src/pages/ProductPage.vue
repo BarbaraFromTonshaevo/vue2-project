@@ -114,7 +114,7 @@
             </fieldset>
 
             <div class="item__row">
-              <CounterForm v-model="productAmount"></CounterForm>
+              <CounterForm :counter.sync="productAmount"></CounterForm>
               <button class="button button--primery" type="submit">
                 В корзину
               </button>

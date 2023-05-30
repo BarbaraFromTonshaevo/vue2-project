@@ -213,9 +213,9 @@
   </aside>
 </template>
 <script>
-import categories from "../data/categories";
 import colors from "../data/colors";
-
+import axios from "axios";
+import { API_BASE_URL } from "@/config";
 export default {
   props: ["priceFrom", "priceTo", "categoryId", "color"],
   data() {
@@ -224,11 +224,12 @@ export default {
       currentPriceTo: 0,
       currentCategoryId: 0,
       currentColor: 0,
+      categoriesData: null,
     };
   },
   computed: {
     categories() {
-      return categories;
+      return this.categoriesData ? this.categoriesData.items : [];
     },
     colors() {
       return colors;
@@ -261,6 +262,14 @@ export default {
       this.$emit("update:categoryId", 0);
       this.$emit("update:color", 0);
     },
+    loadCategories() {
+      axios
+        .get(API_BASE_URL + "/api/productCategories")
+        .then((response) => (this.categoriesData = response.data));
+    },
+  },
+  created() {
+    this.loadCategories();
   },
 };
 </script>

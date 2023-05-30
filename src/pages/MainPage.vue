@@ -72,22 +72,19 @@ export default {
     loadProducts() {
       this.productsLoading = true;
       this.productsLoadingFailed = false;
-      clearTimeout(this.loadProductsTimer);
-      this.loadProductsTimer = setTimeout(() => {
-        axios
-          .get(API_BASE_URL + `/api/products`, {
-            params: {
-              page: this.page,
-              limit: this.productsPerPage,
-              categoryId: this.filterCategoryId,
-              minPrice: this.filterPriceFrom,
-              maxPrice: this.filterPriceTo,
-            },
-          })
-          .then((response) => (this.productsData = response.data))
-          .catch(() => (this.productsLoadingFailed = true))
-          .then(() => (this.productsLoading = false));
-      }, 0);
+      axios
+        .get(API_BASE_URL + `/api/products`, {
+          params: {
+            page: this.page,
+            limit: this.productsPerPage,
+            categoryId: this.filterCategoryId,
+            minPrice: this.filterPriceFrom,
+            maxPrice: this.filterPriceTo,
+          },
+        })
+        .then((response) => (this.productsData = response.data))
+        .catch(() => (this.productsLoadingFailed = true))
+        .then(() => (this.productsLoading = false));
     },
   },
   watch: {

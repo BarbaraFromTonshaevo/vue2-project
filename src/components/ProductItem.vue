@@ -4,7 +4,7 @@
       class="catalog__pic"
       :to="{ name: 'product', params: { id: product.id } }"
     >
-      <img v-bind:src="product.img" alt="Название товара" />
+      <img v-bind:src="product.image" alt="Название товара" />
     </router-link>
 
     <h3 class="catalog__title">

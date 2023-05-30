@@ -30,7 +30,7 @@ import { products } from "@/data/products";
 import ProductList from "@/components/ProductList.vue";
 import BasePagination from "@/components/BasePagination.vue";
 import ProductFilter from "@/components/ProductFilter.vue";
-import axios from 'axios';
+import axios from "axios";
 export default {
   components: { ProductList, BasePagination, ProductFilter },
   data: function () {
@@ -68,7 +68,6 @@ export default {
         );
       }
       if (this.filterColor) {
-        // console.log(filteredProducts[0].colors);
         filteredProducts = filteredProducts.filter(
           (product) => product.colors.indexOf(this.filterColor) != -1
         );
@@ -76,21 +75,36 @@ export default {
       return filteredProducts;
     },
     products() {
-      const offset = (this.page - 1) * this.productsPerPage;
-      return this.filteredProducts.slice(offset, offset + this.productsPerPage);
+      return this.productsData
+        ? this.productsData.items.map((product) => {
+            return {
+              ...product,
+              image: product.image.file.url,
+            };
+          })
+        : [];
     },
     countProducts() {
-      return this.filteredProducts.length;
+      return this.productsData ? this.productsData.pagination.total : 0;
     },
   },
   methods: {
-    loadProducts(){
-      axios.get();
+    loadProducts() {
+      axios
+        .get(
+          `https://vue-study.skillbox.cc/api/products?page=${this.page}&limit=${this.productsPerPage}`
+        )
+        .then((response) => (this.productsData = response.data));
     },
   },
-  created(){
+  watch: {
+    page() {
+      this.loadProducts();
+    },
+  },
+  created() {
     this.loadProducts();
-  }
+  },
 };
 </script>
 

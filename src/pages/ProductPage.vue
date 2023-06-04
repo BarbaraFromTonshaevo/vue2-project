@@ -35,7 +35,7 @@
             <img
               width="570"
               height="570"
-              :src="product.img"
+              :src="product.image.file.url"
               :alt="product.title"
             />
           </div>
@@ -195,8 +195,8 @@
 <script>
 import { API_BASE_URL } from "@/config";
 import axios from "axios";
-import { products } from "@/data/products";
-import categories from "@/data/categories";
+// import { products } from "@/data/products";
+// import categories from "@/data/categories";
 import goToPage from "@/helpers/goToPage";
 import numberFormat from "@/helpers/numberFormat";
 import CounterForm from "@/components/CounterForm.vue";
@@ -212,12 +212,11 @@ export default {
   components: { CounterForm },
   computed: {
     product() {
-      return products.find((product) => product.id === +this.$route.params.id);
+      // return products.find((product) => product.id === +this.$route.params.id);
+      return this.productData;
     },
     category() {
-      return categories.find(
-        (category) => category.id === this.product.categoryId
-      );
+      return this.productData.category;
     },
   },
   filters: {
@@ -237,8 +236,10 @@ export default {
       axios
         .get(API_BASE_URL + `/api/products/` + this.$route.params.id)
         .then((response) => (this.productData = response.data))
+        .then(() => console.log("upload"))
         .catch(() => (this.productLoadingFailed = true))
-        .then(() => (this.productLoading = false));
+        .then(() => (this.productLoading = false))
+        .then(() => console.log(this.productLoading + " loading"));
     },
   },
   created() {

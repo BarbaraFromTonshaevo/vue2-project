@@ -2,10 +2,10 @@
   <li class="cart__item product">
     <div class="product__pic">
       <img
-        :src="item.product.img"
+        :src="item.product.image"
         width="120"
         height="120"
-        :srcset="item.product.img"
+        :srcset="item.product.image"
         :alt="item.product.title"
       />
     </div>

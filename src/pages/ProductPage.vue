@@ -122,10 +122,16 @@
 
               <div class="item__row">
                 <CounterForm :counter.sync="productAmount"></CounterForm>
-                <button class="button button--primery" type="submit">
+                <button
+                  class="button button--primery"
+                  type="submit"
+                  :disabled="productAddSending"
+                >
                   В корзину
                 </button>
               </div>
+              <div v-show="productAdded">Товар добавлен в корзину</div>
+              <div v-show="productAddSending">Добавляем товар в корзину...</div>
             </form>
           </div>
         </div>
@@ -200,6 +206,7 @@ import axios from "axios";
 import goToPage from "@/helpers/goToPage";
 import numberFormat from "@/helpers/numberFormat";
 import CounterForm from "@/components/CounterForm.vue";
+import { mapActions } from "vuex";
 export default {
   data() {
     return {
@@ -207,6 +214,9 @@ export default {
       productData: null,
       productLoading: false,
       productLoadingFailed: false,
+
+      productAdded: false,
+      productAddSending: false,
     };
   },
   components: { CounterForm },
@@ -223,11 +233,18 @@ export default {
     numberFormat,
   },
   methods: {
+    ...mapActions(["addProductToCart"]),
+
     goToPage,
     addToCart() {
-      this.$store.commit("addProductToCart", {
+      this.productAdded = false;
+      this.productAddSending = true;
+      this.addProductToCart({
         productId: this.product.id,
         amount: this.productAmount,
+      }).then(() => {
+        this.productAdded = true;
+        this.productAddSending = false;
       });
     },
     loadProduct() {

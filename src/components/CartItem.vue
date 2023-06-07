@@ -61,7 +61,7 @@ export default {
         return this.item.amount;
       },
       set(value) {
-        this.$store.commit("updateCartProductAmount", {
+        this.$store.dispatch("updateCartProductAmount", {
           productId: this.item.productId,
           amount: value,
         });

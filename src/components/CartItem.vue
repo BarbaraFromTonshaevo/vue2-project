@@ -51,7 +51,9 @@
 <script>
 import CounterForm from "@/components/CounterForm.vue";
 import numberFormat from "@/helpers/numberFormat";
-import { mapMutations } from "vuex";
+// import { mapMutations, mapActions } from "vuex";
+// import { mapActions } from "vuex";
+
 export default {
   props: ["item"],
   filters: { numberFormat },
@@ -69,7 +71,11 @@ export default {
     },
   },
   methods: {
-    ...mapMutations({ deleteProduct: "deleteCartProduct" }),
+    // ...mapMutations({ deleteProduct: "deleteCartProduct" }),
+    // ...mapActions([{ deleteProduct: "deleteCartProduct" }]),
+    deleteProduct(productId) {
+      this.$store.dispatch("deleteCartProduct", { productId });
+    },
   },
   components: { CounterForm },
 };

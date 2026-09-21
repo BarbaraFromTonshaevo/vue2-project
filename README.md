@@ -4,6 +4,8 @@ A single-page online-store front end built with **Vue 2, Vuex and Vue Router**. 
 
 **Live demo:** https://vue2-project-8bweeygsd-varvara.vercel.app/
 
+> The live demo runs on an in-browser mock API (no server). To see the real Express API in action, run the server locally — see [Getting started](#getting-started).
+
 | Catalog | Product page | Cart |
 | :---: | :---: | :---: |
 | ![Catalog](docs/screenshots/catalog.png) | ![Product page](docs/screenshots/product.png) | ![Cart](docs/screenshots/cart.png) |

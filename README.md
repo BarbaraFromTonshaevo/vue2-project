@@ -132,7 +132,6 @@ Known gaps and planned improvements:
 - Show a toast notification on errors instead of inline messages.
 
 **Tech**
-- Migrate from Vue 2 (end of life) to Vue 3 with Vite and Pinia.
 - Add responsive/mobile layout checks and accessibility audit (keyboard navigation, ARIA for the cart badge and filters).
 - Serve images as WebP with `srcset`.
 - Optionally, host the Express server on a free/paid Node platform to demo the real backend.

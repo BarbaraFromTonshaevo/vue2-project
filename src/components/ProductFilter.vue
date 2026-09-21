@@ -28,6 +28,7 @@
           />
           <span class="form__value">До</span>
         </label>
+        <p class="form__error" v-if="priceError">{{ priceError }}</p>
       </fieldset>
 
       <fieldset class="form__block">
@@ -225,6 +226,7 @@ export default {
       currentCategoryId: 0,
       currentColor: 0,
       categoriesData: null,
+      priceError: "",
     };
   },
   computed: {
@@ -251,12 +253,24 @@ export default {
   },
   methods: {
     submit() {
-      this.$emit("update:priceFrom", this.currentPriceFrom);
-      this.$emit("update:priceTo", this.currentPriceTo);
+      const from = Number(this.currentPriceFrom);
+      const to = Number(this.currentPriceTo);
+      if (Number.isNaN(from) || Number.isNaN(to) || from < 0 || to < 0) {
+        this.priceError = "Цена должна быть неотрицательным числом";
+        return;
+      }
+      if (to && from > to) {
+        this.priceError = "Цена «от» не может быть больше цены «до»";
+        return;
+      }
+      this.priceError = "";
+      this.$emit("update:priceFrom", from);
+      this.$emit("update:priceTo", to);
       this.$emit("update:categoryId", this.currentCategoryId);
       this.$emit("update:color", this.currentColor);
     },
     reset() {
+      this.priceError = "";
       this.$emit("update:priceFrom", 0);
       this.$emit("update:priceTo", 0);
       this.$emit("update:categoryId", 0);
@@ -273,3 +287,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+.form__error {
+  margin: 10px 0 0;
+  color: #ff6b00;
+  font-size: 14px;
+}
+</style>

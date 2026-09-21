@@ -1,5 +1,7 @@
 # Technozavrrr — Vue 2 online store
 
+![CI](https://github.com/BarbaraFromTonshaevo/vue2-project/actions/workflows/ci.yml/badge.svg)
+
 A single-page online-store front end built with **Vue 2, Vuex and Vue Router**. It has a filterable, paginated product catalog, product pages and a server-synced shopping cart.
 
 **Live demo:** https://vue2-project-8bweeygsd-varvara.vercel.app/
@@ -18,7 +20,8 @@ A single-page online-store front end built with **Vue 2, Vuex and Vue Router**. 
 - **Product page** loaded by route (`/product/:id`) with category breadcrumbs, quantity selector and "add to cart" with loading/confirmation state.
 - **Shopping cart** that stays in sync with the backend: add, change quantity (with rollback if the request fails) and remove items; the header badge and order total update reactively.
 - **Cart persistence** via a `userAccessKey` stored in `localStorage`, so the cart survives page reloads.
-- Loading and error states for product requests, with a retry button.
+- Loading and error states for product requests, with a retry button; empty states for the catalog and the cart.
+- Price filter validation (no negative values, "from" not greater than "to").
 - Custom pagination component using `v-model`, and filter component using the `.sync` modifier.
 
 ## Tech stack
@@ -111,11 +114,9 @@ server/         Express mock API (Dockerfile included)
 Known gaps and planned improvements:
 
 **UX**
-- Empty states: message when the filtered catalog has no results and when the cart is empty.
 - Make the color filter work (the selected color is tracked but not sent to the API) and either implement or remove the static "volume" checkboxes.
 - Show loading and error states for the cart (not only for products) and surface failed cart requests to the user.
 - Reflect the current page and filters in the URL query so filtered views can be shared and survive reloads.
-- Validate the price range (from ≤ to, no negatives).
 - Checkout flow: the "Place order" button is not wired to anything yet.
 
 **Product page**
@@ -125,7 +126,6 @@ Known gaps and planned improvements:
 **Code quality**
 - Extract API calls from components into a dedicated service module.
 - Add unit tests (store, mock API, components) and an end-to-end test for the cart flow.
-- Add a GitHub Actions workflow running lint and build on every push.
 - Show a toast notification on errors instead of inline messages.
 
 **Tech**

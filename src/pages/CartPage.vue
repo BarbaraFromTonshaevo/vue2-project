@@ -11,12 +11,16 @@
       </ul>
 
       <h1 class="content__title">Корзина</h1>
-      <span class="content__info"> {{ products.length }} товара </span>
+      <span class="content__info"> {{ countLabel }} </span>
     </div>
 
     <section class="cart">
       <form class="cart__form form" action="#" method="POST">
         <div class="cart__field">
+          <p v-if="!products.length">
+            Корзина пуста.
+            <router-link :to="{ name: 'main' }">Перейти в каталог</router-link>
+          </p>
           <ul class="cart__list">
             <CartItem
               v-for="item in products"
@@ -34,7 +38,11 @@
             Итого: <span>{{ totalPrice | numberFormat }} ₽</span>
           </p>
 
-          <button class="cart__button button button--primery" type="submit">
+          <button
+            class="cart__button button button--primery"
+            type="submit"
+            :disabled="!products.length"
+          >
             Оформить заказ
           </button>
         </div>
@@ -46,6 +54,7 @@
 import numberFormat from "@/helpers/numberFormat";
 import { mapGetters } from "vuex";
 import CartItem from "@/components/CartItem.vue";
+import pluralizeProducts from "@/helpers/pluralizeProducts";
 export default {
   filters: { numberFormat },
   computed: {
@@ -53,6 +62,9 @@ export default {
       products: "cartDetailProducts",
       totalPrice: "cartTotalPrice",
     }),
+    countLabel() {
+      return pluralizeProducts(this.products.length);
+    },
   },
   components: { CartItem },
 };

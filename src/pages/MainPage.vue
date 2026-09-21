@@ -18,6 +18,9 @@
           Поизошла ошибка при загрузке товаров.
           <button @click.prevent="loadProducts">Попробовать еще раз</button>
         </div>
+        <p v-if="isEmpty">
+          По вашему запросу ничего не найдено. Измените фильтры.
+        </p>
         <ProductList :products="products"></ProductList>
 
         <BasePagination
@@ -35,6 +38,7 @@ import ProductList from "@/components/ProductList.vue";
 import BasePagination from "@/components/BasePagination.vue";
 import ProductFilter from "@/components/ProductFilter.vue";
 import axios from "axios";
+import pluralizeProducts from "@/helpers/pluralizeProducts";
 import { API_BASE_URL } from "@/config";
 export default {
   components: { ProductList, BasePagination, ProductFilter },
@@ -68,15 +72,15 @@ export default {
       return this.productsData ? this.productsData.pagination.total : 0;
     },
     countLabel() {
-      const n = this.countProducts;
-      const lastTwo = n % 100;
-      const last = n % 10;
-      let word = "товаров";
-      if (lastTwo < 11 || lastTwo > 14) {
-        if (last === 1) word = "товар";
-        else if (last >= 2 && last <= 4) word = "товара";
-      }
-      return `${n} ${word}`;
+      return pluralizeProducts(this.countProducts);
+    },
+    isEmpty() {
+      return (
+        this.productsData &&
+        !this.productsLoading &&
+        !this.productsLoadingFailed &&
+        this.products.length === 0
+      );
     },
   },
   methods: {

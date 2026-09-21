@@ -253,10 +253,8 @@ export default {
       axios
         .get(API_BASE_URL + `/api/products/` + this.$route.params.id)
         .then((response) => (this.productData = response.data))
-        .then(() => console.log("upload"))
         .catch(() => (this.productLoadingFailed = true))
-        .then(() => (this.productLoading = false))
-        .then(() => console.log(this.productLoading + " loading"));
+        .then(() => (this.productLoading = false));
     },
   },
   created() {

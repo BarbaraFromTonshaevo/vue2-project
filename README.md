@@ -113,7 +113,6 @@ Known gaps and planned improvements:
 **UX**
 - Empty states: message when the filtered catalog has no results and when the cart is empty.
 - Make the color filter work (the selected color is tracked but not sent to the API) and either implement or remove the static "volume" checkboxes.
-- Replace the hard-coded "152 товара" counter with the real total from the API.
 - Show loading and error states for the cart (not only for products) and surface failed cart requests to the user.
 - Reflect the current page and filters in the URL query so filtered views can be shared and survive reloads.
 - Validate the price range (from ≤ to, no negatives).
@@ -121,11 +120,9 @@ Known gaps and planned improvements:
 
 **Product page**
 - Render real product data instead of the static description text, tabs and memory-size options.
-- Use meaningful `alt` text for product images (the catalog uses a placeholder).
 - Add an image gallery.
 
 **Code quality**
-- Remove leftover `console.log` calls in `ProductPage.vue`.
 - Extract API calls from components into a dedicated service module.
 - Add unit tests (store, mock API, components) and an end-to-end test for the cart flow.
 - Add a GitHub Actions workflow running lint and build on every push.

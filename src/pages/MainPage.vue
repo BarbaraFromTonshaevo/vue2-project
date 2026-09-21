@@ -2,7 +2,7 @@
   <main class="content container">
     <div class="content__top content__top--catalog">
       <h1 class="content__title">Каталог</h1>
-      <span class="content__info"> 152 товара </span>
+      <span class="content__info"> {{ countLabel }} </span>
     </div>
 
     <div class="content__catalog">
@@ -66,6 +66,17 @@ export default {
     },
     countProducts() {
       return this.productsData ? this.productsData.pagination.total : 0;
+    },
+    countLabel() {
+      const n = this.countProducts;
+      const lastTwo = n % 100;
+      const last = n % 10;
+      let word = "товаров";
+      if (lastTwo < 11 || lastTwo > 14) {
+        if (last === 1) word = "товар";
+        else if (last >= 2 && last <= 4) word = "товара";
+      }
+      return `${n} ${word}`;
     },
   },
   methods: {
